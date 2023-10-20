@@ -1,7 +1,7 @@
 {
-  "name": "sfml-snake",
-  "version": "0.1",
-  "dependencies": [
-    "sfml"
-  ]
+	"name": "sfml-snake",
+	"version": "0.1",
+	"dependencies": [
+		"sfml"
+	]
 }
