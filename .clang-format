@@ -1,9 +1,9 @@
 Language:									Cpp
 Standard:									Latest
 AccessModifierOffset:						-4
-AlignConsecutiveAssignments:				true
-AlignConsecutiveDeclarations:				true
-AlignConsecutiveMacros:						true
+AlignConsecutiveAssignments:				Consecutive
+AlignConsecutiveDeclarations:				Consecutive
+AlignConsecutiveMacros:						Consecutive
 AlignEscapedNewlines:						Left
 AlignTrailingComments:						true
 AllowAllArgumentsOnNextLine:				true
@@ -12,7 +12,7 @@ AllowAllParametersOfDeclarationOnNextLine:	true
 AllowShortBlocksOnASingleLine:				Empty
 AllowShortCaseLabelsOnASingleLine:			false
 AllowShortEnumsOnASingleLine:				false
-AllowShortFunctionsOnASingleLine:			false
+AllowShortFunctionsOnASingleLine:			None
 AllowShortIfStatementsOnASingleLine:		Never
 AllowShortLambdasOnASingleLine:				Empty
 AllowShortLoopsOnASingleLine:				false
