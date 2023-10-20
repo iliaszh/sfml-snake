@@ -7,10 +7,11 @@ constexpr auto WINDOW_WIDTH	 = 800;
 constexpr auto WINDOW_HEIGHT = 600;
 
 auto main() -> int {
+	const auto	   video_mode	= sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT);
 	constexpr auto window_style = sf::Style::Titlebar | sf::Style::Close;
+	constexpr auto window_title = "What the hell is this";
 
-	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "What the hell is this",
-							window_style);
+	sf::RenderWindow window(video_mode, window_title, window_style);
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(TARGET_FPS);
 
@@ -18,8 +19,6 @@ auto main() -> int {
 
 	constexpr auto buffer_size = 1000;
 	buffer.create(buffer_size);
-
-	buffer.getVertexCount();
 
 	auto vertex_counter = 0;
 
@@ -34,11 +33,11 @@ auto main() -> int {
 			case sf::Event::MouseButtonPressed: {
 				const auto button = event.mouseButton;
 
-				const sf::Vertex point{ sf::Vector2f(static_cast<float>(button.x),
-													 static_cast<float>(button.y)),
-										sf::Color::Green };
+				const sf::Vertex clicked_point{ sf::Vector2f(static_cast<float>(button.x),
+															 static_cast<float>(button.y)),
+												sf::Color::Green };
 
-				buffer.update(&point, 1, vertex_counter);
+				buffer.update(&clicked_point, 1, vertex_counter);
 
 				++vertex_counter;
 				break;
