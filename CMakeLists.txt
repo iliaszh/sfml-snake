@@ -12,4 +12,4 @@ find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
 
 add_executable(snake main.cpp)
 
-target_link_libraries(snake PRIVATE sfml-system sfml-network sfml-window sfml-graphics)
+target_link_libraries(snake PRIVATE sfml-system sfml-window sfml-graphics)
