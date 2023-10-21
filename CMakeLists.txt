@@ -13,7 +13,6 @@ project(snake)
 
 set(CMAKE_CXX_STANDARD 23)
 
-set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
 
 add_executable(snake main.cpp)
