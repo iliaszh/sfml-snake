@@ -37,7 +37,7 @@ auto main() -> int {
 															 static_cast<float>(button.y)),
 												sf::Color::Green };
 
-				buffer.update(&clicked_point, 1, vertex_counter);
+				buffer.update(&clicked_point, 1, static_cast<unsigned int>(vertex_counter));
 
 				++vertex_counter;
 				break;
@@ -49,7 +49,7 @@ auto main() -> int {
 
 		window.clear(sf::Color::Black);
 		if (vertex_counter > 1) {
-			window.draw(buffer, 0, vertex_counter);
+			window.draw(buffer, 0, static_cast<std::size_t>(vertex_counter));
 		}
 
 		window.display();
