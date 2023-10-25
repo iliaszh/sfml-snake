@@ -1,7 +1,11 @@
+#include <print>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-constexpr auto TARGET_FPS = 60;
+#include "player.hpp"
+
+constexpr auto TARGET_FPS = 165;
 
 constexpr auto WINDOW_WIDTH	 = 800;
 constexpr auto WINDOW_HEIGHT = 600;
@@ -12,15 +16,16 @@ auto main() -> int {
 	constexpr auto window_title = "What the hell is this";
 
 	sf::RenderWindow window(video_mode, window_title, window_style);
-	window.setVerticalSyncEnabled(true);
-	window.setFramerateLimit(TARGET_FPS);
+	window.setVerticalSyncEnabled(false);
+	// window.setFramerateLimit(TARGET_FPS);
+	window.setKeyRepeatEnabled(false);
 
-	sf::VertexBuffer buffer{ sf::LineStrip, sf::VertexBuffer::Usage::Dynamic };
+	const auto window_center = sf::Vector2f{ WINDOW_WIDTH / 2.0F, WINDOW_HEIGHT / 2.0F };
 
-	constexpr auto buffer_size = 1000;
-	buffer.create(buffer_size);
+	auto player = Player{ sf::Color::Red };
+	player.set_position(window_center - 0.5F * player.get_box());
 
-	auto vertex_counter = 0;
+	auto key_press_counter = 0;
 
 	while (window.isOpen()) {
 		sf::Event event{};
@@ -30,16 +35,40 @@ auto main() -> int {
 				window.close();
 				break;
 			}
-			case sf::Event::MouseButtonPressed: {
-				const auto button = event.mouseButton;
+			case sf::Event::KeyPressed: {
+				player.on_key_press(event.key);
+				std::println("key pressed {}, key code {}", key_press_counter++,
+							 static_cast<int>(event.key.code));
 
-				const sf::Vertex clicked_point{ sf::Vector2f(static_cast<float>(button.x),
-															 static_cast<float>(button.y)),
-												sf::Color::Green };
+				break;
+			}
+			case sf::Event::KeyReleased: {
+				std::println("key released, key code {}", static_cast<int>(event.key.code));
+				break;
+			}
+			case sf::Event::JoystickConnected: {
+				std::println("joystick connected");
+				break;
+			}
+			case sf::Event::JoystickDisconnected: {
+				std::println("joystick disconnected");
+				break;
+			}
+			case sf::Event::JoystickButtonPressed: {
+				const auto button = event.joystickButton;
+				std::println("joystick button {} pressed", button.button);
+				break;
+			}
+			case sf::Event::JoystickButtonReleased: {
+				const auto button = event.joystickButton;
+				std::println("joystick button {} released", button.button);
+				break;
+			}
+			case sf::Event::JoystickMoved: {
+				const auto move = event.joystickMove;
+				std::println("joystick axis {} moved {}", static_cast<int>(move.axis),
+							 move.position);
 
-				buffer.update(&clicked_point, 1, static_cast<unsigned int>(vertex_counter));
-
-				++vertex_counter;
 				break;
 			}
 			default:
@@ -48,9 +77,8 @@ auto main() -> int {
 		}
 
 		window.clear(sf::Color::Black);
-		if (vertex_counter > 1) {
-			window.draw(buffer, 0, static_cast<std::size_t>(vertex_counter));
-		}
+
+		window.draw(player.drawable());
 
 		window.display();
 	}
