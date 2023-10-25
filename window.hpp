@@ -15,7 +15,6 @@ public:
 	}
 
 	auto draw(std::vector<sf::Drawable> drawables) -> void {
-
 	}
 private:
 	sf::RenderWindow window{};
