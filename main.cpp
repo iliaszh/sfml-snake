@@ -43,6 +43,7 @@ auto main() -> int {
 				break;
 			}
 			case sf::Event::KeyReleased: {
+				player.on_key_release(event.key);
 				std::println("key released, key code {}", static_cast<int>(event.key.code));
 				break;
 			}
@@ -78,6 +79,7 @@ auto main() -> int {
 
 		window.clear(sf::Color::Black);
 
+		player.move(0.05F);
 		window.draw(player.drawable());
 
 		window.display();
