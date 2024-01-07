@@ -6,6 +6,10 @@ cmake-build-*
 
 out
 
+build
+
+.cache
+
 Debug
 
 CMakeFiles

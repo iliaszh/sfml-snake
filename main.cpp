@@ -1,4 +1,5 @@
-#include <print>
+#include <format>
+#include <iostream>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -37,38 +38,39 @@ auto main() -> int {
 			}
 			case sf::Event::KeyPressed: {
 				player.on_key_press(event.key);
-				std::println("key pressed {}, key code {}", key_press_counter++,
-							 static_cast<int>(event.key.code));
+				std::cout << std::format("key pressed {}, key code {}\n", key_press_counter++,
+										 static_cast<int>(event.key.code));
 
 				break;
 			}
 			case sf::Event::KeyReleased: {
 				player.on_key_release(event.key);
-				std::println("key released, key code {}", static_cast<int>(event.key.code));
+				std::cout << std::format("key released, key code {}\n",
+										 static_cast<int>(event.key.code));
 				break;
 			}
 			case sf::Event::JoystickConnected: {
-				std::println("joystick connected");
+				std::cout << "joystick connected\n";
 				break;
 			}
 			case sf::Event::JoystickDisconnected: {
-				std::println("joystick disconnected");
+				std::cout << "joystick disconnected\n";
 				break;
 			}
 			case sf::Event::JoystickButtonPressed: {
 				const auto button = event.joystickButton;
-				std::println("joystick button {} pressed", button.button);
+				std::cout << std::format("joystick button {} pressed\n", button.button);
 				break;
 			}
 			case sf::Event::JoystickButtonReleased: {
 				const auto button = event.joystickButton;
-				std::println("joystick button {} released", button.button);
+				std::cout << std::format("joystick button {} released\n", button.button);
 				break;
 			}
 			case sf::Event::JoystickMoved: {
 				const auto move = event.joystickMove;
-				std::println("joystick axis {} moved {}", static_cast<int>(move.axis),
-							 move.position);
+				std::cout << std::format("joystick axis {} moved {}\n", static_cast<int>(move.axis),
+										 move.position);
 
 				break;
 			}

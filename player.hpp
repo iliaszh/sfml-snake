@@ -1,6 +1,8 @@
 #ifndef SNAKE_PLAYER_HPP
 #define SNAKE_PLAYER_HPP
 
+#include <cmath>
+
 #include <SFML/Graphics.hpp>
 
 class Player {
