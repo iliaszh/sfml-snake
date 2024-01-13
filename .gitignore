@@ -2,6 +2,8 @@
 
 .vs
 
+.vscode
+
 cmake-build-*
 
 out
