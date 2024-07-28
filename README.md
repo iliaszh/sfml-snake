@@ -2,6 +2,11 @@
 
 The project is built with CMake.
 
+Clone the repo with all submodules:
+```sh
+git clone --recurse-submodules <repo>
+```
+
 1. Run vcpkg's bootstrap script in repository's ./vcpkg directory:
 
 - if on Windows:
